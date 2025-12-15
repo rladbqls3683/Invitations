@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>invitation</title>
+  <style>
+    :root {
+      --text: #f7f2eb;
+      --backdrop: #0e0b14;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: var(--backdrop);
+      color: var(--text);
+      overscroll-behavior: none;
+      touch-action: none;
+    }
+
+    body { font-family: 'Noto Sans KR', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    video#invitationVideo {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      background: var(--backdrop);
+      object-fit: cover;
+    }
+
+    .cta {
+      position: fixed;
+      left: 50%;
+      bottom: 12vh;
+      transform: translateX(-50%);
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: 1.5px solid #000;
+      color: #000;
+      background: #fff;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: none;
+      backdrop-filter: none;
+      animation: none;
+    }
+  </style>
+</head>
+<body>
+  <video id="invitationVideo" autoplay loop muted playsinline preload="auto">
+    <source src="전자상가 1080V.mp4" type="video/mp4">
+  </video>
+
+  <a class="cta" href="https://jackcube02.github.io/YongsanArchive/" target="_blank" rel="noopener noreferrer">전자상가 입장하기</a>
+
+  <script>
+    (function () {
+      const video = document.getElementById('invitationVideo');
+
+      function ensurePlay() {
+        const promise = video.play();
+        if (promise && promise.catch) {
+          promise.catch(() => {});
+        }
+      }
+
+      function pause() {
+        video.pause();
+      }
+
+      function resume() {
+        ensurePlay();
+      }
+
+      video.addEventListener('loadeddata', ensurePlay);
+      video.addEventListener('pointerdown', pause);
+      video.addEventListener('pointerup', resume);
+      video.addEventListener('pointercancel', resume);
+      video.addEventListener('pointerleave', resume);
+    })();
+  </script>
+</body>
+</html>
